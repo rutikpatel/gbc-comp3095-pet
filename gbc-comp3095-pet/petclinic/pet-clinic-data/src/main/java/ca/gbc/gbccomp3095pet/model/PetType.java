@@ -2,7 +2,7 @@ package ca.gbc.gbccomp3095pet.model;
 
 import java.time.LocalDate;
 
-public class PetType {
+public class PetType extends BaseEntity{
     private  String name;
 
     public String getName() {
