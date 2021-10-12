@@ -1,4 +1,4 @@
-package ca.gbc.gbccomp3095pet;
+package ca.gbc.gbccomp3095pet.model;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
