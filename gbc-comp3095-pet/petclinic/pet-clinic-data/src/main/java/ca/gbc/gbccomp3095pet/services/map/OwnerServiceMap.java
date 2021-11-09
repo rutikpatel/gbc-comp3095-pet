@@ -1,13 +1,25 @@
 package ca.gbc.gbccomp3095pet.services.map;
 
 import ca.gbc.gbccomp3095pet.model.Owner;
+import ca.gbc.gbccomp3095pet.model.Pet;
 import ca.gbc.gbccomp3095pet.services.OwnerService;
+import ca.gbc.gbccomp3095pet.services.PetService;
+import ca.gbc.gbccomp3095pet.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final PetService petService;
+    private final PetTypeService petTypeService;
+
+    public OwnerServiceMap(PetService petService, PetTypeService petTypeService) {
+        this.petService = petService;
+        this.petTypeService = petTypeService;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -25,7 +37,27 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+        if(object != null){
+            if(object.getPets() != null){
+                object.getPets().forEach(pet->{
+                    if(pet.getPetType()!= null){
+                        if(pet.getPetType().getId()==null){
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    }
+                    else{
+                        throw new RuntimeException("Pet Type is Require");
+                    }
+
+                    if(pet.getId()==null){
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+            return super.save(object);
+        }
+        return null;
     }
 
     @Override

@@ -1,5 +1,4 @@
 package ca.gbc.gbccomp3095pet.controller;
-
 import ca.gbc.gbccomp3095pet.services.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +16,13 @@ public class VetController {
     @RequestMapping({
             "",
             "/",
-            "index",
-            "index.html"
+            "/index",
+            "/index.html"
     })
 
 
     public String listVets( Model model){
         model.addAttribute("vets",vetService.findAll());
-        return"vets/index";
+        return"/vets/index";
     }
 }
