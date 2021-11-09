@@ -1,11 +1,9 @@
 package ca.gbc.gbccomp3095pet.services;
 
 import ca.gbc.gbccomp3095pet.model.Owner;
-import java.util.Set;
-public interface OwnerService {
+
+public interface OwnerService extends CRUDservice<Owner, Long>{
 
    Owner findByLastname(String lastname);
-   Owner findByid(Long id);
-   Owner save(Owner owner);
-   Set<Owner> findAll();
+
 }
