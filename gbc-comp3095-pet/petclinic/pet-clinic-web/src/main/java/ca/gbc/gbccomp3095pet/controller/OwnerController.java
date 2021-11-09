@@ -1,20 +1,22 @@
 package ca.gbc.gbccomp3095pet.controller;
-
+import ca.gbc.gbccomp3095pet.services.OwnerService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("owners")
+@RequestMapping("/owners")
 @Controller
 public class OwnerController {
 
-    @RequestMapping({
-            "",
-            "/",
-            "index",
-            "index.html"
-    })
+    private final OwnerService ownerService;
 
-    public String listOwner(){
-        return"owner/index";
+    public OwnerController(OwnerService ownerService) {
+        this.ownerService = ownerService;
+    }
+
+    @RequestMapping({"", "/", "index", "index.html"})
+    public String listOwners( Model model){
+        model.addAttribute("owners",ownerService.findAll());
+        return"owners/index";
     }
 }

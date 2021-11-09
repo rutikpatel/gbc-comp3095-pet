@@ -1,11 +1,13 @@
 package ca.gbc.gbccomp3095pet.services.map;
 
 import ca.gbc.gbccomp3095pet.model.Pet;
-import ca.gbc.gbccomp3095pet.services.CRUDservice;
+import ca.gbc.gbccomp3095pet.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CRUDservice<Pet, Long> {
+@Service
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
         return super.findAll();
@@ -23,7 +25,7 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements CRUD
 
     @Override
     public Pet save(Pet object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override

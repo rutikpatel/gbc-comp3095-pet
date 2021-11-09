@@ -1,13 +1,13 @@
 package ca.gbc.gbccomp3095pet.services.map;
 
 import ca.gbc.gbccomp3095pet.model.Owner;
-import ca.gbc.gbccomp3095pet.services.CRUDservice;
+import ca.gbc.gbccomp3095pet.services.OwnerService;
+import org.springframework.stereotype.Service;
 
-import javax.sql.rowset.CachedRowSet;
 import java.util.Set;
-import java.util.concurrent.SubmissionPublisher;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CRUDservice<Owner,Long> {
+@Service
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -25,11 +25,16 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastname(String lastname) {
+        return null;
     }
 }
